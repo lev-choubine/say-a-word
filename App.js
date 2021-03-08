@@ -7,7 +7,7 @@ import Inputs from './inputs.js'
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text h1>Read to me!</Text>
+      <Text style={styles.header} h1>Read to me!</Text>
       <Text>{"\n"}
       Enter a word {"\n"}
       then press the "READ" button to heat it back!
@@ -33,4 +33,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  header: {
+    color: '#8a2be2',
+    fontSize: 50,
+  }
 });
