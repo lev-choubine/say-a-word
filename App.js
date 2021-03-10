@@ -7,17 +7,17 @@ import Inputs from './inputs.js'
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.header} h1>Read to me!</Text>
-      <Text>{"\n"}
+      <Text style={styles.header} h1>ゲロゲロ</Text>
+      <Text style={styles.text}>{"\n"}
       Enter a word {"\n"}
-      then press the "READ" button to heat it back!
+      then press the "READ" button to hear it back!
       </Text>
       <Image 
-        source={require('./hacker.jpg')} 
+        source={require('./unnamed.png')} 
         style={{
-          height: 400,
-          width:200,
-          borderRadius: 30,
+          height: 270,
+          width:250,
+          // borderRadius: 100,
           marginTop: 20
         }}/>
       <StatusBar style="auto" />
@@ -34,7 +34,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   header: {
-    color: '#8a2be2',
+    color: '#008000',
     fontSize: 50,
+  },
+  text: {
+    justifyContent: 'center',
+
   }
 });

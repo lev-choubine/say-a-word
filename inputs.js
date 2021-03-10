@@ -1,26 +1,49 @@
 
-import React, { Component } from 'react'
+import React, { Component, useState} from 'react'
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 // import Tts from 'react-native-tts'
 import * as Speech from 'expo-speech';
-class Inputs extends Component {
-   state = {
-      email: ''
+
+
+export default function Inputs() {
+    const [email, setEmail] = useState('')
+    const [kanji, setKanji] = useState([])
+    
+    function handleEmail(text){
+        setEmail(text)
+     }
      
-   }
+    function login (email){
+      //   alert('your super word is: ' + email);
+      //   Tts.speak('Hello, world!');
+          getKanji();
+          ;
+     }
+  
+   function getKanji() {
+  
+          fetch(`https://kanji-cors-bypass.herokuapp.com/api/${email}`)
+      
+            .then((response) => response.json())
+      
+            .then((json) => {setKanji(json);
+            console.log(kanji)
+            Speech.speak(kanji[0].senses[0].english_definitions[0])
+            })
+      
+            .catch((error) => console.error(error))
+      
+    }
+
+
+
+
    
+
+    
+
+
    
-   handleEmail = (text) => {
-      this.setState({ email: text })
-   }
-   
-   login = (email) => {
-    //   alert('your super word is: ' + email);
-    //   Tts.speak('Hello, world!');
-       
-        Speech.speak(email);
-   }
-   render() {
       return (
          <View style = {styles.container}>
             <TextInput style = {styles.input}
@@ -28,22 +51,29 @@ class Inputs extends Component {
                placeholder = "Your Word Here"
                placeholderTextColor = "#9a73ef"
                autoCapitalize = "none"
-               onChangeText = {this.handleEmail}/>
+               onChangeText = {handleEmail}/>
             
             
             
             <TouchableOpacity
                style = {styles.submitButton}
                onPress = {
-                  () => this.login(this.state.email)
+                  () => login()
                }>
-               <Text style = {styles.submitButtonText}> Read! </Text>
+            
+               <Text style = {styles.submitButtonText}> Translate </Text>
             </TouchableOpacity>
+            <Text>{
+               kanji.length!==0?
+               kanji[0].senses[0].english_definitions[0]:
+               ''
+               }</Text>
          </View>
-      )
-   }
+      );
+   
 }
-export default Inputs
+
+
 
 const styles = StyleSheet.create({
    container: {
