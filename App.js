@@ -8,15 +8,12 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.header} h1>ゲロゲロ</Text>
-      <Text style={styles.text}>{"\n"}
-      Enter a word {"\n"}
-      then press the "READ" button to hear it back!
-      </Text>
+      
       <Image 
         source={require('./unnamed.png')} 
         style={{
-          height: 270,
-          width:250,
+          height: 100,
+          width:90,
           // borderRadius: 100,
           marginTop: 20
         }}/>
