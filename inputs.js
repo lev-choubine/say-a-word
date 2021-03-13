@@ -1,9 +1,11 @@
 
-import React, { Component, useState} from 'react'
+import React, { Component, useState, useRef} from 'react'
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 // import Tts from 'react-native-tts'
 import * as Speech from 'expo-speech';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import Syns from './syns.js'
+
 
 export default function Inputs() {
     const [email, setEmail] = useState('')
@@ -11,6 +13,10 @@ export default function Inputs() {
     const [gestureName, setGestureName]= useState('none')
     const [myText, setMyText]= useState('I\'m ready to get swiped!')
     const [backgroundColor, setBackgroundColor]= useState('orange')
+    const [syns, setSyns]= useState([])
+
+
+
     function handleEmail(text){
         setEmail(text)
      }
@@ -29,6 +35,7 @@ export default function Inputs() {
             .then(async(json) => {
             await setKanji(json);
             console.log(json)
+            setSyns([])
             await Speech.speak(json[0].senses[0].english_definitions[0])
             })
       
@@ -59,6 +66,21 @@ function onSwipe(gestureName, gestureState) {
    switch (gestureName) {
      case SWIPE_UP:
       setBackgroundColor('red');
+      fetch(`https://kanji-cors-bypass.herokuapp.com/syno/${kanji[0].senses[0].english_definitions[0]}`)
+      
+            .then((response) => response.json())
+      
+            .then(async(json) => {
+            
+            console.log(json[0].meta.syns)
+            if(json[0].meta.syns){
+               setSyns(json[0].meta.syns[0])
+            }else{
+               setSyns([])
+            }
+            })
+      
+            .catch((error) => console.error(error))
        break;
      case SWIPE_DOWN:
       setBackgroundColor('green');
@@ -133,7 +155,10 @@ function onSwipe(gestureName, gestureState) {
             
                <Text style = {styles.submitButtonText}> 翻訳 </Text>
             </TouchableOpacity>
-      
+          
+               <Syns syns={syns}/>
+        
+            
             
          </View>
       );
