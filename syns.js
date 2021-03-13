@@ -7,11 +7,24 @@ import { View, Text, TouchableOpacity, TextInput, StyleSheet, FlatList, SafeArea
  
     const Syns = (props) => {
         const [syns, setSyns]=useState(props.syns)
-      
+        let synss=""
+        if(props.syns){
+            synss=props.syns.map((p,index)=>{
+                
+               return(
+                <Text>{p}</Text>
+               )
+                    
+                
+        })}else{
+            synss=""
+        }
+   
     
     return(
-       
-    <Text>{props.syns?props.syns:''}</Text>
+        <View>
+       {synss}
+       </View>
     )
 
 }
