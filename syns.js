@@ -1,18 +1,23 @@
-import React, { Component, useState, useRef } from 'react'
+import React, { Component, useState, useRef, useEffect } from 'react'
 
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, FlatList, SafeAreaView, StatusBar} from 'react-native'
-
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, FlatList, SafeAreaView, StatusBar, Div} from 'react-native'
+import JapSyns from "./japSyn.js"
 
    
  
     const Syns = (props) => {
         const [syns, setSyns]=useState(props.syns)
+        const [japSyns, setJapSyns]=useState('')
         let synss=""
         if(props.syns){
             synss=props.syns.map((p,index)=>{
                 
                return(
-                <Text>{p}</Text>
+
+                
+                  
+                    <JapSyns　word={p}/>
+            
                )
                     
                 
@@ -20,7 +25,7 @@ import { View, Text, TouchableOpacity, TextInput, StyleSheet, FlatList, SafeArea
             synss=""
         }
    
-    
+
     return(
         <View>
        {synss}
