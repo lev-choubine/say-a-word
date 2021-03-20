@@ -22,7 +22,7 @@ useEffect(()=>{
     })
 
     .catch((error) => console.error(error))
-},[props])
+},[props.word])
 return(
     <View style={{flexDirection:'row', flexWrap:'wrap', fontSize: 20, alignSelf: 'center',}}>
     <Text style={{fontSize: 20, alignSelf: 'flex-end'}}>
