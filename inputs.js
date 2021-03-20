@@ -60,13 +60,25 @@ export default function Inputs() {
   setMyText('You swiped left!');
 }
  
-function onSwipe(gestureName, gestureState) {
+async function onSwipe (gestureName, gestureState){
    const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
    setGestureName(gestureName);
    switch (gestureName) {
      case SWIPE_UP:
       setBackgroundColor('red');
-      fetch(`https://kanji-cors-bypass.herokuapp.com/syno/${kanji[0].senses[0].english_definitions[0]}`)
+      let word=kanji[0].senses[0].english_definitions[0];
+      let newWord
+      function checkVerb(word){
+          
+        if(word.slice(0,3)==="to "){
+            newWord = word.slice(3)
+          }  else{
+              newWord = word
+          }
+      }
+      await checkVerb(word)
+      console.log(newWord)
+      fetch(`https://kanji-cors-bypass.herokuapp.com/syno/${newWord}`)
       
             .then((response) => response.json())
       

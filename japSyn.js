@@ -4,9 +4,12 @@ import { View, Text, TouchableOpacity, TextInput, StyleSheet, Div } from 'react-
 
 const JapSyns = (props) => {
     const[japSyn, setJapSyn]=useState('')
-
+    const[vebr, setVerb]=useState(props.word)
 
 useEffect(()=>{
+  
+   
+
     fetch(`https://kanji-cors-bypass.herokuapp.com/api/${props.word}`)
       
     .then((response) => response.json())
